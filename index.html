@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reporte de Gestión Estratégica - Proyectiva Agencia de Seguros</title>
+<style>
+:root{--naranja:#E8721C;--naranja-claro:#F5A623;--amarillo:#FFC857;--azul-profundo:#1B2A4A;--gris-claro:#F8F9FA;--gris-medio:#E9ECEF;--verde:#28a745;--amarillo-sem:#F0AD4E;--rojo:#DC3545;--texto:#2C3E50;--texto-sec:#6C757D;--blanco:#FFFFFF;--gradient:linear-gradient(135deg,#E8721C,#F5A623,#FFC857)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;background:var(--gris-claro);color:var(--texto);line-height:1.6}
+.container{max-width:1200px;margin:0 auto;padding:2rem}
+header{background:linear-gradient(135deg,var(--azul-profundo),#2D4A7A);color:var(--blanco);padding:2.5rem 3rem;border-radius:16px;margin-bottom:2rem;box-shadow:0 8px 32px rgba(27,42,74,0.25);position:relative;overflow:hidden}
+header::before{content:'';position:absolute;top:-50%;right:-10%;width:300px;height:300px;background:var(--gradient);border-radius:50%;opacity:0.15}
+header::after{content:'';position:absolute;bottom:-30%;left:-5%;width:200px;height:200px;background:var(--gradient);border-radius:50%;opacity:0.1}
+header h1{font-size:1.75rem;font-weight:700;margin-bottom:0.5rem;position:relative;z-index:1}
+header .subtitle{font-size:1rem;opacity:0.9;position:relative;z-index:1}
+header .meta{display:flex;gap:2rem;margin-top:1rem;font-size:0.85rem;opacity:0.8;position:relative;z-index:1}
+.logo-placeholder{float:right;width:80px;height:80px;background:rgba(255,255,255,0.12);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:0.65rem;text-align:center;color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.2);position:relative;z-index:1}
+.resumen-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem;margin-bottom:2.5rem}
+.resumen-card{background:var(--blanco);border-radius:14px;padding:1.5rem;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,0.06);border-top:4px solid var(--naranja);transition:transform 0.2s}
+.resumen-card:hover{transform:translateY(-2px)}
+.resumen-card .valor{font-size:2rem;font-weight:700;color:var(--azul-profundo)}
+.resumen-card .label{font-size:0.85rem;color:var(--texto-sec);margin-top:0.25rem}
+.section{margin-bottom:2.5rem}
+.section-title{font-size:1.25rem;font-weight:700;color:var(--azul-profundo);margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:3px solid var(--naranja);display:inline-block}
+.section-desc{background:var(--blanco);border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:1.25rem;box-shadow:0 2px 12px rgba(0,0,0,0.04);font-size:0.92rem;color:var(--texto-sec);border-left:4px solid var(--naranja)}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-bottom:1.5rem}
+.kpi-card{background:var(--blanco);border-radius:12px;padding:1.25rem;box-shadow:0 2px 12px rgba(0,0,0,0.06);display:flex;align-items:center;gap:1rem}
+.kpi-card .semaforo{width:14px;height:14px;border-radius:50%;flex-shrink:0}
+.semaforo.verde{background:var(--verde)}.semaforo.amarillo{background:var(--amarillo-sem)}.semaforo.rojo{background:var(--rojo)}.semaforo.gris{background:var(--gris-medio)}
+.kpi-card .kpi-info{flex:1}
+.kpi-card .kpi-name{font-size:0.85rem;color:var(--texto-sec)}
+.kpi-card .kpi-values{display:flex;gap:1.5rem;margin-top:0.25rem}
+.kpi-card .kpi-real{font-weight:700;color:var(--azul-profundo)}
+.kpi-card .kpi-obj{font-size:0.85rem;color:var(--texto-sec)}
+.cumpl-critico{color:var(--rojo);font-weight:600}.cumpl-pendiente{color:var(--texto-sec);font-style:italic;font-size:0.8rem}
+.cumpl-ok{color:var(--verde);font-weight:600}
+.progress-bar{width:100%;height:8px;background:var(--gris-medio);border-radius:4px;overflow:hidden;margin-top:0.5rem}
+.progress-bar .fill{height:100%;border-radius:4px;transition:width 0.5s ease}
+.fill-verde{background:var(--verde)}.fill-amarillo{background:var(--amarillo-sem)}.fill-rojo{background:var(--rojo)}.fill-naranja{background:var(--naranja)}
+.table-wrapper{background:var(--blanco);border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);margin-bottom:1.5rem}
+table{width:100%;border-collapse:collapse}
+th{background:var(--azul-profundo);color:var(--blanco);padding:0.85rem 1rem;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.03em;text-align:left}
+td{padding:0.75rem 1rem;font-size:0.88rem;border-bottom:1px solid var(--gris-medio)}
+tr:nth-child(even) td{background:var(--gris-claro)}
+tr:last-child td{border-bottom:none}
+.badge{display:inline-block;padding:0.2rem 0.6rem;border-radius:6px;font-size:0.75rem;font-weight:600}
+.badge-prod{background:#d4edda;color:#155724}.badge-pruebas{background:#fff3cd;color:#856404}.badge-dev{background:#cce5ff;color:#004085}.badge-definicion{background:#f3e5f5;color:#6a1b9a}.badge-pendiente{background:#e9ecef;color:#495057}
+.alerta-box{background:#fff5f5;border:1px solid #f5c6cb;border-left:4px solid var(--rojo);border-radius:10px;padding:1rem 1.25rem;margin-bottom:1rem}
+.alerta-box.warning{background:#fffbea;border-color:#ffeeba;border-left-color:var(--amarillo-sem)}
+.alerta-box.info{background:#e8f4fd;border-color:#bee5eb;border-left-color:#17a2b8}
+.alerta-box h4{font-size:0.9rem;margin-bottom:0.25rem;color:var(--rojo)}
+.alerta-box.warning h4{color:#856404}
+.alerta-box.info h4{color:#0c5460}
+.alerta-box p,.alerta-box li{font-size:0.85rem;color:var(--texto-sec)}
+.equipo-tag{display:inline-block;background:var(--azul-profundo);color:var(--blanco);padding:0.3rem 0.75rem;border-radius:20px;font-size:0.8rem;margin:0.25rem}
+.backlog-list{background:var(--blanco);border-radius:12px;padding:1.25rem;box-shadow:0 2px 12px rgba(0,0,0,0.04);margin-bottom:1rem}
+.backlog-list ul{padding-left:1.5rem}.backlog-list li{margin-bottom:0.4rem;font-size:0.88rem;color:var(--texto-sec)}
+.footer{text-align:center;padding:2rem 0 1rem;font-size:0.8rem;color:var(--texto-sec);border-top:1px solid var(--gris-medio);margin-top:2rem}
+.conversion-dashboard{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.25rem;margin-bottom:2.5rem}
+.conversion-card{background:var(--blanco);border-radius:14px;padding:1.75rem;box-shadow:0 4px 16px rgba(0,0,0,0.06);border-left:5px solid var(--naranja);position:relative;overflow:hidden}
+.conversion-card::after{content:'';position:absolute;top:0;right:0;width:60px;height:60px;background:var(--gradient);opacity:0.08;border-radius:0 14px 0 60px}
+.conversion-card .metric-value{font-size:2.2rem;font-weight:800;color:var(--azul-profundo)}
+.conversion-card .metric-label{font-size:0.82rem;color:var(--texto-sec);margin-top:0.25rem;text-transform:uppercase;letter-spacing:0.05em}
+.conversion-card .metric-context{font-size:0.78rem;color:var(--naranja);margin-top:0.5rem;font-weight:600}
+@media(max-width:768px){.container{padding:1rem}header{padding:1.5rem}header h1{font-size:1.3rem}.resumen-grid{grid-template-columns:repeat(2,1fr)}.conversion-dashboard{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<div class="logo-placeholder">LOGO<br>Proyectiva</div>
+<h1>Reporte de Gesti&oacute;n Estrat&eacute;gica</h1>
+<p class="subtitle">Proyectiva Agencia de Seguros &mdash; Informe VP Sponsor</p>
+<div class="meta"><span>Fecha de corte: 8 de Mayo 2026</span><span>Carriles activos: 4</span></div>
+</header>
+<section class="section">
+<h2 class="section-title">Dashboard de Conversi&oacute;n</h2>
+<div class="conversion-dashboard">
+<div class="conversion-card">
+<div class="metric-value">5.29%</div>
+<div class="metric-label">Conversi&oacute;n Leads &rarr; P&oacute;liza (Vida y Desempleo)</div>
+<div class="metric-context">Objetivo: 8% &middot; Cumplimiento: 66.17%</div>
+<div class="progress-bar"><div class="fill fill-amarillo" style="width:66%"></div></div>
+</div>
+<div class="conversion-card">
+<div class="metric-value">78.29%</div>
+<div class="metric-label">% Desistimiento Vida y Desempleo</div>
+<div class="metric-context">Punto de atenci&oacute;n cr&iacute;tico</div>
+<div class="progress-bar"><div class="fill fill-rojo" style="width:78%"></div></div>
+</div>
+<div class="conversion-card">
+<div class="metric-value">20.65%</div>
+<div class="metric-label">Conversi&oacute;n Leads &rarr; Renovaci&oacute;n Arrendamiento</div>
+<div class="metric-context">Objetivo: 60% &middot; Cumplimiento: 34.41%</div>
+<div class="progress-bar"><div class="fill fill-rojo" style="width:34%"></div></div>
+</div>
+<div class="conversion-card">
+<div class="metric-value">$0</div>
+<div class="metric-label">Ventas SOAT (Fase 1 en desarrollo)</div>
+<div class="metric-context">Objetivo anual: $100,000 MM &middot; Salida: 30 mayo</div>
+<div class="progress-bar"><div class="fill fill-naranja" style="width:2%"></div></div>
+</div>
+</div>
+</section>
+<section class="section">
+<h2 class="section-title">Resumen Ejecutivo</h2>
+<div class="resumen-grid">
+<div class="resumen-card"><div class="valor">4</div><div class="label">Carriles Estrat&eacute;gicos</div></div>
+<div class="resumen-card"><div class="valor">5 Dev</div><div class="label">Equipo Total</div></div>
+<div class="resumen-card"><div class="valor" style="color:var(--amarillo-sem)">En Construcci&oacute;n</div><div class="label">KPIs Digitales</div></div>
+<div class="resumen-card"><div class="valor" style="color:var(--rojo)">2</div><div class="label">Alertas Activas</div></div>
+</div>
+</section>
+<section class="section">
+<h2 class="section-title">1. Experiencia Digital y Ventas</h2>
+<div class="section-desc"><strong>Prop&oacute;sito:</strong> Impulsar la generaci&oacute;n de ingresos y la autogesti&oacute;n de clientes a trav&eacute;s de canales digitales, mediante experiencias end-to-end que permitan cotizar, adquirir y gestionar productos de forma aut&oacute;noma, eficiente y escalable.</div>
+<h3 style="font-size:1rem;color:var(--azul-profundo);margin-bottom:0.75rem">KPIs</h3>
+<div class="kpi-grid">
+<div class="kpi-card"><div class="semaforo gris"></div><div class="kpi-info"><div class="kpi-name">Leads Portal</div><div class="kpi-values"><span class="kpi-real">En construcci&oacute;n</span><span class="kpi-obj">Obj: En definici&oacute;n</span></div><div class="cumpl-pendiente">Pendiente</div></div></div>
+<div class="kpi-card"><div class="semaforo gris"></div><div class="kpi-info"><div class="kpi-name">INS Portal</div><div class="kpi-values"><span class="kpi-real">En construcci&oacute;n</span><span class="kpi-obj">Obj: 80</span></div><div class="cumpl-pendiente">Pendiente</div></div></div>
+<div class="kpi-card"><div class="semaforo gris"></div><div class="kpi-info"><div class="kpi-name">SLO (confiabilidad Datadog)</div><div class="kpi-values"><span class="kpi-real">En construcci&oacute;n</span><span class="kpi-obj">Obj: 90</span></div><div class="cumpl-pendiente">Pendiente</div></div></div>
+<div class="kpi-card"><div class="semaforo gris"></div><div class="kpi-info"><div class="kpi-name">Tr&aacute;fico/Sesiones (Mes)</div><div class="kpi-values"><span class="kpi-real">En construcci&oacute;n</span><span class="kpi-obj">Obj: TBD</span></div><div class="cumpl-pendiente">Pendiente</div></div></div>
+</div>
+<div class="alerta-box info"><h4>&#9888; Punto de Atenci&oacute;n</h4><p>Los KPIs digitales del portal a&uacute;n est&aacute;n en construcci&oacute;n. Es cr&iacute;tico definir metas con negocio para medir el impacto de la experiencia digital en la conversi&oacute;n.</p></div>
+<h3 style="font-size:1rem;color:var(--azul-profundo);margin-bottom:0.75rem">Estado Actual &mdash; Venta Digital Seguro de Arrendamiento (end-to-end)</h3>
+<div class="section-desc"><strong>Alcance:</strong> Experiencia digital completa: Cotizaci&oacute;n &rarr; Estudio digital &rarr; Firma con biometr&iacute;a &rarr; Inventario y entrega.<br><br><strong>Estado:</strong> Definici&oacute;n funcional del flujo end-to-end.<br><strong>Dise&ntilde;o UX:</strong> Propuesta entregada 5 de mayo.<br><br><strong>Objetivo:</strong> Autogesti&oacute;n total del cliente y reducci&oacute;n de fricci&oacute;n operativa.</div>
+<div class="backlog-list"><strong>Backlog &mdash; Estrategia de Conversi&oacute;n:</strong><ul><li><strong>Atraer:</strong> Hero impactante para productos estrella (Seguro de Arrendamiento)</li><li><strong>Empujar:</strong> Alertas inteligentes (banners para renovaciones) reemplazando popups</li><li><strong>Guiar:</strong> Accesos directos a WhatsApp y agentes IA en tiempo real</li></ul></div>
+<div><span class="equipo-tag">1 Dev</span><span class="equipo-tag">0.15 LT</span></div>
+</section>
+<section class="section">
+<h2 class="section-title">2. Venta de SOAT Proyectiva</h2>
+<div class="section-desc"><strong>Objetivo:</strong> Desarrollar un canal digital escalable de venta de SOAT que, por fases (venta dirigida, bases de terceros, venta delegada), capture oportunidades de mercado y consolide generaci&oacute;n recurrente de ingresos.</div>
+<h3 style="font-size:1rem;color:var(--azul-profundo);margin-bottom:0.75rem">KPIs</h3>
+<div class="kpi-grid">
+<div class="kpi-card"><div class="semaforo rojo"></div><div class="kpi-info"><div class="kpi-name">Ventas totales SOAT</div><div class="kpi-values"><span class="kpi-real">$0</span><span class="kpi-obj">Obj Anual: $100,000 MM</span></div><div class="cumpl-critico">0.00%</div></div></div>
+<div class="kpi-card"><div class="semaforo rojo"></div><div class="kpi-info"><div class="kpi-name"># P&oacute;lizas vendidas</div><div class="kpi-values"><span class="kpi-real">0</span><span class="kpi-obj">Obj Anual: 208,000</span></div><div class="cumpl-critico">0.00%</div></div></div>
+</div>
+<h3 style="font-size:1rem;color:var(--azul-profundo);margin-bottom:0.75rem">Fase 1 &mdash; Flujo T&aacute;ctico (Salida: 30 de mayo)</h3>
+<div class="section-desc"><strong>Alcance:</strong> Venta digital de SOAT AXA Colpatria dirigida a base de clientes en campa&ntilde;as (venta dirigida).</div>
+<div class="table-wrapper"><table><thead><tr><th>Componente</th><th>Estado</th><th>Fecha Clave</th></tr></thead><tbody>
+<tr><td>Front flujo de compra y UX</td><td><span class="badge badge-dev">En desarrollo</span></td><td>12 mayo</td></tr>
+<tr><td>Integraci&oacute;n back AXA</td><td><span class="badge badge-dev">En proceso</span></td><td>-</td></tr>
+<tr><td>URL experiencia de compra</td><td><span class="badge badge-dev">En desarrollo</span></td><td>14 mayo</td></tr>
+<tr><td>Gateway de pagos</td><td><span class="badge badge-definicion">Revisi&oacute;n docs API</span></td><td>-</td></tr>
+<tr><td>Tronador (registro recaudo)</td><td><span class="badge badge-pendiente">Espera API</span></td><td>API en pruebas</td></tr>
+<tr><td>Informe conciliaci&oacute;n</td><td><span class="badge badge-pendiente">Sin iniciar</span></td><td>-</td></tr>
+</tbody></table></div>
+<div class="backlog-list"><strong>Roadmap:</strong><ul><li><strong>Fase 2:</strong> Flujo estrat&eacute;gico (bases de terceros)</li><li><strong>Fase 3:</strong> Venta Mundial Seguros</li><li><strong>Fase 4:</strong> Venta delegada</li></ul></div>
+<div><span class="equipo-tag">2 Dev F&aacute;brica</span><span class="equipo-tag">1 Dev Autogesti&oacute;n</span><span class="equipo-tag">0.15 LT</span></div>
+</section>
+<section class="section">
+<h2 class="section-title">3. CRM Proyectiva</h2>
+<div class="section-desc"><strong>Objetivo:</strong> Optimizar gesti&oacute;n de leads y conversi&oacute;n a p&oacute;lizas mediante un CRM unificado (Vida y Desempleo, Arrendamiento, Renovaciones).</div>
+<h3 style="font-size:1rem;color:var(--azul-profundo);margin-bottom:0.75rem">KPIs</h3>
+<div class="kpi-grid">
+<div class="kpi-card"><div class="semaforo amarillo"></div><div class="kpi-info"><div class="kpi-name">Conversi&oacute;n leads &rarr; p&oacute;liza Vida y Desempleo</div><div class="kpi-values"><span class="kpi-real">5.29%</span><span class="kpi-obj">Obj: 8%</span></div><div style="font-size:0.8rem;font-weight:600;color:var(--amarillo-sem)">66.17%</div><div class="progress-bar"><div class="fill fill-amarillo" style="width:66%"></div></div></div></div>
+<div class="kpi-card"><div class="semaforo rojo"></div><div class="kpi-info"><div class="kpi-name">% Desistimiento Vida y Desempleo</div><div class="kpi-values"><span class="kpi-real">78.29%</span><span class="kpi-obj">-</span></div><div class="cumpl-critico">Punto cr&iacute;tico</div></div></div>
+<div class="kpi-card"><div class="semaforo rojo"></div><div class="kpi-info"><div class="kpi-name">Conversi&oacute;n leads &rarr; renovaci&oacute;n arrendamiento</div><div class="kpi-values"><span class="kpi-real">20.65%</span><span class="kpi-obj">Obj: 60%</span></div><div class="cumpl-critico">34.41%</div><div class="progress-bar"><div class="fill fill-rojo" style="width:34%"></div></div></div></div>
+<div class="kpi-card"><div class="semaforo gris"></div><div class="kpi-info"><div class="kpi-name">Tasa no renovaci&oacute;n arrendamiento</div><div class="kpi-values"><span class="kpi-real">4.71%</span><span class="kpi-obj">-</span></div><div class="cumpl-pendiente">Monitoreo</div></div></div>
+</div>
+<h3 style="font-size:1rem;color:var(--azul-profundo);margin-bottom:0.75rem">Estado Actual</h3>
+<div class="section-desc"><span class="badge badge-prod">Completado</span> Conexi&oacute;n nueva API de operaci&oacute;n al CRM de Vida y Desempleo para entrega de leads.</div>
+<div class="alerta-box warning"><h4>&#9888; Alerta de Conversi&oacute;n</h4><p>Desistimiento Vida y Desempleo (78.29%) cr&iacute;ticamente alto. Conversi&oacute;n renovaci&oacute;n arrendamiento (20.65% vs 60%) requiere acciones inmediatas.</p></div>
+<div class="backlog-list"><strong>Backlog:</strong><ul><li><strong>Unificaci&oacute;n CRMs:</strong> Consolidar Vida y Desempleo, Arrendamiento, Renovaciones, Prevalidador, Autos</li></ul></div>
+<div><span class="equipo-tag">1 Dev Autogesti&oacute;n</span><span class="equipo-tag">0.15 LT</span></div>
+</section>
+<section class="section">
+<h2 class="section-title">Visi&oacute;n Estrat&eacute;gica &mdash; Pr&oacute;ximos Pasos</h2>
+<div class="table-wrapper"><table><thead><tr><th>Carril</th><th>Hito Cr&iacute;tico</th><th>Fecha</th><th>Impacto</th></tr></thead><tbody>
+<tr><td>SOAT Fase 1</td><td>Salida a producci&oacute;n</td><td>30 mayo</td><td>Primeras ventas digitales SOAT</td></tr>
+<tr><td>SOAT</td><td>Front de compra finalizado</td><td>12 mayo</td><td>UX completa</td></tr>
+<tr><td>SOAT</td><td>URL experiencia de compra</td><td>14 mayo</td><td>Canal para campa&ntilde;as</td></tr>
+<tr><td>Experiencia Digital</td><td>Propuesta UX end-to-end</td><td>5 mayo (entregada)</td><td>Base Seguro Arrendamiento</td></tr>
+<tr><td>CRM</td><td>Unificaci&oacute;n CRMs</td><td>Por definir</td><td>Reducci&oacute;n fricci&oacute;n operativa</td></tr>
+</tbody></table></div>
+</section>
+<div class="footer"><p>Informe generado con IA &mdash; Squad Agentes IA &middot; Proyectiva Agencia de Seguros &middot; Mayo 2026</p></div>
+</div>
+</body>
+</html>
